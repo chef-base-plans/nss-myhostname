@@ -2,7 +2,7 @@
 
 # nss-myhostname
 
-nss-myhostname is a plugin for the GNU Name Service Switch (NSS) functionality of the GNU C Library (glibc) providing host name resolution for the locally configured system hostname as returned by gethostname(2). This plugin is commonly enabled in the default `/etc/nsswitch.conf` NSS configuration of RHEL and RHEL-like Linux distributions. glibc has `/etc/nsswitch.conf` hard-coded as the file location for configuration. So long as core/glibc ships with that setting, this plugin is necessary for some software to perform name resolution with expected behavior.  See [documentation](http://0pointer.de/lennart/projects/nss-myhostname/) 
+nss-myhostname is a plugin for the GNU Name Service Switch (NSS) functionality of the GNU C Library (glibc) providing host name resolution for the locally configured system hostname as returned by gethostname(2). This plugin is commonly enabled in the default `/etc/nsswitch.conf` NSS configuration of RHEL and RHEL-like Linux distributions. glibc has `/etc/nsswitch.conf` hard-coded as the file location for configuration. So long as core/glibc ships with that setting, this plugin is necessary for some software to perform name resolution with expected behavior.  See [documentation](http://0pointer.de/lennart/projects/nss-myhostname/)
 
 ## Maintainers
 
@@ -10,11 +10,11 @@ nss-myhostname is a plugin for the GNU Name Service Switch (NSS) functionality o
 
 ## Type of Package
 
-Binary package
+Library package
 
 ### Use as Dependency
 
-Binary packages can be set as runtime or build time dependencies. See [Defining your dependencies](https://www.habitat.sh/docs/developing-packages/developing-packages/#sts=Define%20Your%20Dependencies) for more information.
+Library packages can be set as runtime or build time dependencies, however they are typically used as buildtime dependencies. See [Defining your dependencies](https://www.habitat.sh/docs/developing-packages/developing-packages/#sts=Define%20Your%20Dependencies) for more information.
 
 To add core/nss-myhostname as a dependency, you can add one of the following to your plan file.
 
@@ -22,44 +22,39 @@ To add core/nss-myhostname as a dependency, you can add one of the following to 
 
 > pkg_build_deps=(core/nss-myhostname)
 
-#### Runtime dependency
+#### Runtime Dependency
 
 > pkg_deps=(core/nss-myhostname)
 
-### Use as Tool
+### Use as a Library
 
 #### Installation
 
-To install this plan, you should run the following commands to first install, and then link the binaries this plan creates.
+To install this plan, run the following command:
 
-``hab pkg install core/nss-myhostname --binlink``
-
-will add the following binaries to the PATH:
-
-* TODO - Copy the binlink output and then run ``bins``
-* TODO - Add binary
-* TODO - Add binary
-
-For example:
+``hab pkg install core/nss-myhostname``
 
 ```bash
-$ hab pkg install core/nss-myhostname --binlink
-TODO: ADD THE OUTPUT HERE
+hab pkg install core/nss-myhostname
+» Installing core/nss-myhostname
+☁ Determining latest version of core/nss-myhostname in the 'stable' channel
+→ Found newer installed version (core/nss-myhostname/0.3/20200928180849) than remote version (core/nss-myhostname/0.3/20200403172913)
+→ Using core/nss-myhostname/0.3/20200928180849
+★ Install of core/nss-myhostname/0.3/20200928180849 complete with 0 new packages installed.
 ```
 
-##### Additional Steps
+#### Viewing library files
 
-TODO: ADD OR DELETE THIS SECTION AS NEEDED 
-
-To use core/nss-myhostname as a stand alone binary, you must configure ...
-
-#### Using an example binary
-
-You can now use the binary as normal.  For example:
-
-``/bin/nss-myhostname --help`` or ``nss-myhostname --help``
+To view the library files first get the habitat installation directory
 
 ```bash
-$ nss-myhostname --help
-TODO:  ADD SOME OUTPUT HERE, BUT NO MORE THAN 10-15 lines...
+hab pkg path core/nss-myhostname
+/hab/pkgs/core/nss-myhostname/0.3/20200928180849
+```
+
+Then list the libraries, for example:
+
+```bash
+ls -1 $(hab pkg path core/nss-myhostname)/lib
+libnss_myhostname.so.2
 ```
